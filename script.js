@@ -17,11 +17,6 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-function showDashboard() {
-  clearLoginForm();
-  loginScreen.classList.add('hidden');
-  dashboardScreen.classList.remove('hidden');
-}
 
 function dashboardVisible() {
   return !dashboardScreen.classList.contains('hidden');
