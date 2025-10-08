@@ -31,15 +31,11 @@
 
     <section id="dashboardScreen" class="screen screen-dashboard hidden">
       <header class="company-header">
-        <div>
-          <p class="welcome" id="welcomeMessage">대표님, 환영해요!</p>
-          <h1 class="company-name" id="companyName">(주) 바이브코딩</h1>
-          <div class="company-info">
-            <span class="company-type" id="companyType">법인사업자</span>
-            <span class="company-reg-num" id="companyRegNum">123-45-67890</span>
-          </div>
+        <h1 class="company-name">(주) 바이브코딩</h1>
+        <div class="company-info">
+          <span class="company-type">법인사업자</span>
+          <span class="company-reg-num">123-45-67890</span>
         </div>
-        <button class="btn btn-secondary" id="btnLogout">로그아웃</button>
       </header>
 
       <section class="vat-report-section">
@@ -47,42 +43,59 @@
         <div class="vat-summary">
           <div class="vat-item">
             <span class="vat-label">신고기간</span>
-            <span class="vat-value" id="vatPeriod">-</span>
+            <span class="vat-value">2024년 1분기</span>
           </div>
           <div class="vat-item">
             <span class="vat-label">신고금액</span>
-            <span class="vat-value amount" id="vatAmount">-</span>
+            <span class="vat-value amount">₩1,234,567</span>
           </div>
           <div class="vat-item">
             <span class="vat-label">납부세액</span>
-            <span class="vat-value amount" id="vatTax">-</span>
+            <span class="vat-value amount">₩123,456</span>
           </div>
           <div class="vat-item">
             <span class="vat-label">신고상태</span>
-            <span class="vat-value status" id="vatStatus">-</span>
+            <span class="vat-value status completed">신고완료</span>
           </div>
         </div>
         <button class="btn btn-primary">신고내역 상세보기</button>
       </section>
 
-      <section class="sales-section">
-        <h2 class="section-title">매출 구분별 요약</h2>
-        <table class="sales-table" id="salesTable">
-          <thead>
-            <tr>
-              <th>구분</th>
-              <th>건수</th>
-              <th>공급가액</th>
-              <th>세액</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
-
       <section class="documents-section">
         <h2 class="section-title">문서 및 매출 내역</h2>
-        <div class="documents-grid" id="documentsGrid"></div>
+        <div class="documents-grid">
+          <div class="document-card">
+            <div class="document-icon">📄</div>
+            <h3 class="document-title">세금계산서</h3>
+            <div class="document-count">15건</div>
+            <div class="document-amount">₩2,345,678</div>
+            <button class="btn btn-outline">상세보기</button>
+          </div>
+
+          <div class="document-card">
+            <div class="document-icon">🧾</div>
+            <h3 class="document-title">계산서</h3>
+            <div class="document-count">8건</div>
+            <div class="document-amount">₩1,234,567</div>
+            <button class="btn btn-outline">상세보기</button>
+          </div>
+
+          <div class="document-card">
+            <div class="document-icon">💳</div>
+            <h3 class="document-title">카드매출</h3>
+            <div class="document-count">45건</div>
+            <div class="document-amount">₩4,567,890</div>
+            <button class="btn btn-outline">상세보기</button>
+          </div>
+
+          <div class="document-card">
+            <div class="document-icon">🧾</div>
+            <h3 class="document-title">현금영수증</h3>
+            <div class="document-count">23건</div>
+            <div class="document-amount">₩3,456,789</div>
+            <button class="btn btn-outline">상세보기</button>
+          </div>
+        </div>
       </section>
     </section>
   </main>
