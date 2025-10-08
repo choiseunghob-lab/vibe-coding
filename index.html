@@ -7,104 +7,120 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="app-header">
-    <h1>부가세 신고 도우미</h1>
-    <nav class="steps">
-      <span class="step is-active">1. 로그인</span>
-      <span class="step">2. 자료수집</span>
-      <span class="step">3. 검토</span>
-      <span class="step">4. 신고파일</span>
-      <span class="step">5. 홈택스 제출</span>
-    </nav>
-  </header>
-
-  <main class="container">
-    <!-- 섹션 A. 카카오 로그인 -->
-    <section id="login-section" class="card">
-      <h2>카카오로 시작</h2>
-      <p class="muted">사업자 확인과 알림 발송을 위해 카카오 로그인이 필요합니다.</p>
-      <button id="btnKakao" class="btn primary">카카오로 로그인</button>
-      <div id="loginStatus" class="status"></div>
-    </section>
-
-    <!-- 섹션 B. 약관/동의 -->
-    <section id="consent-section" class="card hidden">
-      <h2>동의 사항</h2>
-      <label class="checkbox"><input type="checkbox" id="agreeScrape" /> 홈택스 매출/매입 자료 수집에 동의합니다.</label>
-      <label class="checkbox"><input type="checkbox" id="agreePrivacy" /> 개인정보 처리방침에 동의합니다.</label>
-      <div class="row">
-        <button id="btnConsent" class="btn">동의하고 계속</button>
-      </div>
-    </section>
-
-    <!-- 섹션 C. 홈택스 인증 정보 입력(프록시/RPA 연동 전 단계) -->
-    <section id="hometax-section" class="card hidden">
-      <h2>홈택스 연결</h2>
-      <p class="muted">인증 방식 선택</p>
-      <div class="grid2">
-        <label class="radio"><input type="radio" name="authType" value="certificate" checked /> 공동/금융 인증서</label>
-        <label class="radio"><input type="radio" name="authType" value="idpw" /> 아이디/비밀번호</label>
-      </div>
-      <div class="row">
-        <button id="btnConnectHometax" class="btn">홈택스 연결 시도</button>
-        <span id="hometaxStatus" class="status"></span>
-      </div>
-      <p class="tip">실서비스에서는 이 버튼이 서버의 RPA/연동 API를 호출합니다.</p>
-    </section>
-
-    <!-- 섹션 D. 데이터 수집/프로그레스 -->
-    <section id="progress-section" class="card hidden">
-      <h2>자료 수집 진행상태</h2>
-      <progress id="scrapeProgress" value="0" max="100"></progress>
-      <div id="progressLog" class="log"></div>
-    </section>
-
-    <!-- 섹션 E. 데이터 미리보기 -->
-    <section id="preview-section" class="card hidden">
-      <h2>매출/매입 요약</h2>
-      <div class="grid2">
-        <div>
-          <h3>매출 합계</h3>
-          <div id="salesTotal" class="kpi">-</div>
-          <table id="salesTable" class="table"></table>
-        </div>
-        <div>
-          <h3>매입 합계</h3>
-          <div id="purchaseTotal" class="kpi">-</div>
-          <table id="purchaseTable" class="table"></table>
+  <main class="app">
+    <section id="loginScreen" class="screen screen-login">
+      <div class="login-card">
+        <div class="login-brand">kakao</div>
+        <p class="login-title">계정과 비밀번호 입력 없이<br />카카오톡으로 로그인해 보세요.</p>
+        <button id="btnKakao" class="btn btn-kakao">카카오톡으로 로그인</button>
+        <div class="divider"><span>또는</span></div>
+        <p class="login-subtitle">계정 정보 입력으로도 로그인할 수 있어요.</p>
+        <label class="input-label" for="loginId">카카오메일 아이디, 이메일, 전화번호</label>
+        <input id="loginId" type="text" placeholder="아이디 또는 이메일" />
+        <label class="input-label" for="loginPw">비밀번호</label>
+        <input id="loginPw" type="password" placeholder="비밀번호" />
+        <label class="remember"><input id="keepLogin" type="checkbox" /> 로그인 상태 유지</label>
+        <button id="btnSignIn" class="btn btn-login">로그인</button>
+        <div class="login-links">
+          <a href="#">비밀번호 찾기</a>
+          <a href="#">계정 찾기</a>
+          <a href="#">회원가입</a>
         </div>
       </div>
-      <div class="row">
-        <button id="btnMakeReturn" class="btn primary">부가가치세 신고서 생성</button>
-      </div>
     </section>
 
-    <!-- 섹션 F. 신고서/전자파일 생성 -->
-    <section id="return-section" class="card hidden">
-      <h2>신고서 결과</h2>
-      <div class="grid2">
-        <div>
-          <h3>요약</h3>
-          <ul id="returnSummary" class="list"></ul>
+    <section id="dashboardScreen" class="screen screen-dashboard hidden">
+      <header class="dash-header">
+        <div class="dash-copy">
+          <p class="dash-subtitle">SAVETAX 히든머니</p>
+          <h1 class="dash-title"><span id="userName">대표님</span>의 환급을 도와드릴게요</h1>
         </div>
-        <div>
-          <h3>전자파일</h3>
-          <button id="btnDownloadXml" class="btn">전자파일(XML) 다운로드</button>
-          <button id="btnDownloadPdf" class="btn">미리보기(PDF)</button>
+        <button class="btn btn-add">사업자 추가 +</button>
+      </header>
+
+      <div class="pill-tabs">
+        <button class="pill is-active">개인사업자</button>
+        <button class="pill">법인사업자</button>
+      </div>
+
+      <div class="notice">
+        <span class="notice-label">환급신청을 완료해 주세요</span>
+      </div>
+
+      <section id="accountList" class="account-list"></section>
+
+      <section class="workflow">
+        <div class="workflow-header">
+          <h2 class="workflow-title">부가세 신고 도우미</h2>
+          <p class="workflow-subtitle">동의를 완료하면 홈택스 자료 수집과 신고서 생성 과정을 차례대로 안내해 드려요.</p>
         </div>
-      </div>
-      <div class="row">
-        <button id="btnSubmitHometax" class="btn">홈택스에 신고</button>
-        <span id="submitStatus" class="status"></span>
-      </div>
+
+        <section id="consent-section" class="workflow-card hidden">
+          <h3>동의 사항</h3>
+          <label class="wf-checkbox"><input type="checkbox" id="agreeScrape" /> 홈택스 매출/매입 자료 수집에 동의합니다.</label>
+          <label class="wf-checkbox"><input type="checkbox" id="agreePrivacy" /> 개인정보 처리방침에 동의합니다.</label>
+          <button id="btnConsent" class="wf-btn wf-btn-primary">동의하고 계속</button>
+        </section>
+
+        <section id="hometax-section" class="workflow-card hidden">
+          <h3>홈택스 연결</h3>
+          <p class="wf-muted">인증 방식 선택</p>
+          <div class="wf-radio-group">
+            <label class="wf-radio"><input type="radio" name="authType" value="certificate" checked /> 공동/금융 인증서</label>
+            <label class="wf-radio"><input type="radio" name="authType" value="idpw" /> 아이디/비밀번호</label>
+          </div>
+          <div class="wf-row">
+            <button id="btnConnectHometax" class="wf-btn wf-btn-secondary">홈택스 연결 시도</button>
+            <span id="hometaxStatus" class="wf-status"></span>
+          </div>
+          <p class="wf-tip">실서비스에서는 이 버튼이 서버의 RPA/연동 API를 호출합니다.</p>
+        </section>
+
+        <section id="progress-section" class="workflow-card hidden">
+          <h3>자료 수집 진행상태</h3>
+          <progress id="scrapeProgress" value="0" max="100" class="wf-progress"></progress>
+          <div id="progressLog" class="wf-log"></div>
+        </section>
+
+        <section id="preview-section" class="workflow-card hidden">
+          <h3>매출/매입 요약</h3>
+          <div class="wf-grid">
+            <div>
+              <h4>매출 합계</h4>
+              <div id="salesTotal" class="wf-kpi">-</div>
+              <table id="salesTable" class="wf-table"></table>
+            </div>
+            <div>
+              <h4>매입 합계</h4>
+              <div id="purchaseTotal" class="wf-kpi">-</div>
+              <table id="purchaseTable" class="wf-table"></table>
+            </div>
+          </div>
+          <button id="btnMakeReturn" class="wf-btn wf-btn-primary">부가가치세 신고서 생성</button>
+        </section>
+
+        <section id="return-section" class="workflow-card hidden">
+          <h3>신고서 결과</h3>
+          <div class="wf-grid">
+            <div>
+              <h4>요약</h4>
+              <ul id="returnSummary" class="wf-list"></ul>
+            </div>
+            <div class="wf-actions">
+              <button id="btnDownloadXml" class="wf-btn wf-btn-secondary">전자파일(XML) 다운로드</button>
+              <button id="btnDownloadPdf" class="wf-btn wf-btn-secondary">미리보기(PDF)</button>
+            </div>
+          </div>
+          <div class="wf-row">
+            <button id="btnSubmitHometax" class="wf-btn wf-btn-outline">홈택스에 신고</button>
+            <span id="submitStatus" class="wf-status"></span>
+          </div>
+        </section>
+      </section>
     </section>
   </main>
 
-  <footer class="app-footer">
-    <small>ⓒ VAT Assistant</small>
-  </footer>
-
-  <!-- 카카오 SDK: 실제 키로 교체 필요 -->
+  <!-- 카카오 SDK 실제 키 적용 시 주석 해제 -->
   <!-- <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script> -->
   <script src="script.js"></script>
 </body>
