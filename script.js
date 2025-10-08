@@ -76,6 +76,7 @@ btnConsent.addEventListener('click', () => {
     alert('모든 동의 항목을 체크해 주세요.');
     return;
   }
+  show('#consent-section', false);
   show('#hometax-section', true);
 });
 
@@ -84,6 +85,7 @@ btnConnectHometax.addEventListener('click', async () => {
   status.textContent = '연결 시도 중';
   await sleep(500);
   status.textContent = '인증 성공(데모)';
+  show('#hometax-section', false);
   show('#progress-section', true);
   startScrapeDemo();
 });
@@ -106,6 +108,7 @@ btnMakeReturn.addEventListener('click', () => {
     summary.appendChild(li);
   });
 
+  show('#preview-section', false);
   show('#return-section', true);
 });
 
@@ -127,6 +130,9 @@ btnSubmitHometax.addEventListener('click', async () => {
 function completeLogin(name) {
   state.user = { name };
   userName.textContent = state.user.name;
+  document.getElementById('loginId').value = '';
+  document.getElementById('loginPw').value = '';
+  document.getElementById('keepLogin').checked = false;
   renderAccounts();
   toggleScreens();
   resetWorkflow();
@@ -273,6 +279,7 @@ function renderPreview() {
   table('#salesTable', ['구분', '공급가액', '세액', '건수'], state.sales);
   table('#purchaseTable', ['구분', '공급가액', '세액', '건수'], state.purchases);
 
+  show('#progress-section', false);
   show('#preview-section', true);
 }
 
