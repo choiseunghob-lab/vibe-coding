@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>부가세 신고 도우미</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section id="loginScreen" class="screen screen-login">
+      <div class="login-card">
+        <div class="login-brand">kakao</div>
+        <p class="login-title">계정과 비밀번호 입력 없이<br />카카오톡으로 로그인해 보세요.</p>
+        <button id="btnKakao" class="btn btn-kakao">카카오톡으로 로그인</button>
+        <div class="divider"><span>또는</span></div>
+        <p class="login-subtitle">계정 정보 입력으로도 로그인할 수 있어요.</p>
+        <label class="input-label" for="loginId">카카오메일 아이디, 이메일, 전화번호</label>
+        <input id="loginId" type="text" placeholder="아이디 또는 이메일" />
+        <label class="input-label" for="loginPw">비밀번호</label>
+        <input id="loginPw" type="password" placeholder="비밀번호" />
+        <label class="remember"><input id="keepLogin" type="checkbox" /> 로그인 상태 유지</label>
+        <button id="btnSignIn" class="btn btn-login">로그인</button>
+        <div class="login-links">
+          <a href="#">비밀번호 찾기</a>
+          <a href="#">계정 찾기</a>
+          <a href="#">회원가입</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboardScreen" class="screen screen-dashboard hidden">
+      <header class="dash-header">
+        <div class="dash-copy">
+          <p class="dash-subtitle">SAVETAX 히든머니</p>
+          <h1 class="dash-title"><span id="userName">대표님</span>의 환급을 도와드릴게요</h1>
+        </div>
+        <button class="btn btn-add">사업자 추가 +</button>
+      </header>
+
+      <div class="pill-tabs">
+        <button class="pill is-active">개인사업자</button>
+        <button class="pill">법인사업자</button>
+      </div>
+
+      <div class="notice">
+        <span class="notice-label">환급신청을 완료해 주세요</span>
+      </div>
+
+      <section id="accountList" class="account-list"></section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
