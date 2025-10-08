@@ -1,0 +1,161 @@
+:root {
+  --bg: #0b0c10;
+  --card: #15171c;
+  --text: #e8eaed;
+  --muted: #9aa0a6;
+  --primary: #4f8cff;
+  --border: #2a2d33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 system-ui, -apple-system, "Segoe UI", Roboto;
+}
+
+.app-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-header h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.steps {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.step {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.step.is-active {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  background: #1c2128;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.status {
+  margin-left: 8px;
+  color: var(--muted);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  text-align: left;
+}
+
+.kpi {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+.log {
+  height: 100px;
+  overflow: auto;
+  border: 1px dashed var(--border);
+  padding: 8px;
+  border-radius: 8px;
+  background: #0f1115;
+}
+
+.list {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.checkbox input,
+.radio input {
+  margin-right: 8px;
+}
+
+.tip {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.app-footer {
+  border-top: 1px solid var(--border);
+  padding: 12px 20px;
+  color: var(--muted);
+}
