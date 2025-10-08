@@ -48,6 +48,75 @@
       </div>
 
       <section id="accountList" class="account-list"></section>
+
+      <section class="workflow">
+        <div class="workflow-header">
+          <h2 class="workflow-title">부가세 신고 도우미</h2>
+          <p class="workflow-subtitle">동의를 완료하면 홈택스 자료 수집과 신고서 생성 과정을 차례대로 안내해 드려요.</p>
+        </div>
+
+        <section id="consent-section" class="workflow-card hidden">
+          <h3>동의 사항</h3>
+          <label class="wf-checkbox"><input type="checkbox" id="agreeScrape" /> 홈택스 매출/매입 자료 수집에 동의합니다.</label>
+          <label class="wf-checkbox"><input type="checkbox" id="agreePrivacy" /> 개인정보 처리방침에 동의합니다.</label>
+          <button id="btnConsent" class="wf-btn wf-btn-primary">동의하고 계속</button>
+        </section>
+
+        <section id="hometax-section" class="workflow-card hidden">
+          <h3>홈택스 연결</h3>
+          <p class="wf-muted">인증 방식 선택</p>
+          <div class="wf-radio-group">
+            <label class="wf-radio"><input type="radio" name="authType" value="certificate" checked /> 공동/금융 인증서</label>
+            <label class="wf-radio"><input type="radio" name="authType" value="idpw" /> 아이디/비밀번호</label>
+          </div>
+          <div class="wf-row">
+            <button id="btnConnectHometax" class="wf-btn wf-btn-secondary">홈택스 연결 시도</button>
+            <span id="hometaxStatus" class="wf-status"></span>
+          </div>
+          <p class="wf-tip">실서비스에서는 이 버튼이 서버의 RPA/연동 API를 호출합니다.</p>
+        </section>
+
+        <section id="progress-section" class="workflow-card hidden">
+          <h3>자료 수집 진행상태</h3>
+          <progress id="scrapeProgress" value="0" max="100" class="wf-progress"></progress>
+          <div id="progressLog" class="wf-log"></div>
+        </section>
+
+        <section id="preview-section" class="workflow-card hidden">
+          <h3>매출/매입 요약</h3>
+          <div class="wf-grid">
+            <div>
+              <h4>매출 합계</h4>
+              <div id="salesTotal" class="wf-kpi">-</div>
+              <table id="salesTable" class="wf-table"></table>
+            </div>
+            <div>
+              <h4>매입 합계</h4>
+              <div id="purchaseTotal" class="wf-kpi">-</div>
+              <table id="purchaseTable" class="wf-table"></table>
+            </div>
+          </div>
+          <button id="btnMakeReturn" class="wf-btn wf-btn-primary">부가가치세 신고서 생성</button>
+        </section>
+
+        <section id="return-section" class="workflow-card hidden">
+          <h3>신고서 결과</h3>
+          <div class="wf-grid">
+            <div>
+              <h4>요약</h4>
+              <ul id="returnSummary" class="wf-list"></ul>
+            </div>
+            <div class="wf-actions">
+              <button id="btnDownloadXml" class="wf-btn wf-btn-secondary">전자파일(XML) 다운로드</button>
+              <button id="btnDownloadPdf" class="wf-btn wf-btn-secondary">미리보기(PDF)</button>
+            </div>
+          </div>
+          <div class="wf-row">
+            <button id="btnSubmitHometax" class="wf-btn wf-btn-outline">홈택스에 신고</button>
+            <span id="submitStatus" class="wf-status"></span>
+          </div>
+        </section>
+      </section>
     </section>
   </main>
 
